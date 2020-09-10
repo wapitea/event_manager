@@ -5,7 +5,7 @@ defmodule EventManager.Handler do
   ```
   %{event: "event_name", payload: "data"}
   ```
-  The payload data can be any of type (integer, float, Map ...).
+  The payload data can be of any type (integer, float, Map ...).
   """
 
   @callback subscriptions() :: any
