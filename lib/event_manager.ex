@@ -125,7 +125,13 @@ defmodule EventManager do
 
     Registry.dispatch(@registry_name, event_name, fn state ->
       for {pid, {module, callback}} <- state do
-        apply(module, callback, [pid, event_data])
+        try do
+          spawn(fn -> apply(module, callback, [pid, event_data]) end)
+        catch
+          kind, reason ->
+            formatted = Exception.format(kind, reason, __STACKTRACE__)
+            Logger.error("Registry.dispatch/3 failed with #{formatted}")
+        end
       end
     end)
   end
