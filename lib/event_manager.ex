@@ -1,9 +1,9 @@
 defmodule EventManager do
   @moduledoc """
   The event manager dispatches events to subscribers.
-  It can help you a lot to reduce your code complexity and reduce lib coupeling.
 
-  It simply use elixir's Registry and add some syntax sugar and helpers in top of it.
+  It simply and adds some syntactic sugar and helpers on top of elixir's Registry.
+  It can also help reduce code complexity and lib coupling.
   """
 
   @registry_name EventManagerRegistry
@@ -16,7 +16,7 @@ defmodule EventManager do
 
   `opts` accepts :
 
-  - `:apps`: Application name that you want to use in EventManager.
+  - `:apps`: The application name that you want to use in EventManager.
 
   E.g
 
@@ -30,8 +30,8 @@ defmodule EventManager do
   @doc """
   Subscribe to an event.
 
-  You can subscribe to an event using `@subscribe` attribute. To be able to use
-  this attribute, you must need first to use `EventManager.Handler`.
+  You can subscribe to an event by using the `@subscribe` attribute. To use
+  this attribute, you must use `EventManager.Handler`.
 
   E.g.
 
@@ -51,10 +51,10 @@ defmodule EventManager do
     end
     ```
 
-  > `pid` is the process id that subscribe to the event.
-  > `payload` is the data that have been dispatched.
+  > `pid` is the id of the process that subscribes to the event.
+  > `payload` is the data that has been dispatched.
 
-  You can also subscribe dynamically (in runtime) using directly this function.
+  You can also subscribe dynamically (during runtime) using this function directly.
 
   E.g
 
@@ -86,12 +86,12 @@ defmodule EventManager do
   end
 
   @doc """
-  Unsubsribe to the specified event.
+  Unsubsribe from the specified event.
 
-  It could be really usefull for async system that is used by multiple PID for example.
-  It's higly recommand to use only for dynamic subscription (see `EventManager.subscribe/2`)
+  It can be very useful for async systems that are used by multiple PID for example.
+  It's higly recommended only to use it for dynamic subscriptions (see `EventManager.subscribe/2`)
 
-  > It will only unsubscribe the event for the PID that call it.
+  > It will only unsubscribe the event for the current PID.
 
   E.g.
 
@@ -106,7 +106,7 @@ defmodule EventManager do
   Dispatch my event to every registered subscriber.
 
   The dispatch function will call all Modules/functions that have subscribed to the dispatch event.
-  Plus, you can add some data that are useful for manage the event in callbacks.
+  You can also add some data useful for managing the event in callbacks.
 
   For example, if you want to dispatch an event when a new user is created, it could be
   nice to send the user in the event payload.
@@ -117,7 +117,7 @@ defmodule EventManager do
       iex> EventManager.dispatch("user_created", %{user: user})
       iex> EventManager.dispatch("user_created", user)
 
-  Basically you can send whatever you want as payload.
+  Basically you can send whatever you want as a payload.
   """
   @spec dispatch(String.t(), any) :: :ok
   def dispatch(event_name, event_data) do
@@ -133,8 +133,8 @@ defmodule EventManager do
   @doc """
   Start subscriptions.
 
-  This function is automatically call if you use `EventManager.start_link/1`.
-  But it's nive to now that you can call it manually depending of your needs.
+  This function is automatically called if you use `EventManager.start_link/1`,
+  but it's nice to know that you can call it manually depending on your needs.
 
   E.g.
       iex> EventManager.start_link([MyApp])
@@ -166,7 +166,7 @@ defmodule EventManager do
   end
 
   @doc """
-  Return the registry name use by `EventManager`.
+  Return the registry name used by `EventManager`.
   """
   def get_registry_name(), do: @registry_name
 end
