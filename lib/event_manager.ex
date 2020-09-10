@@ -88,10 +88,10 @@ defmodule EventManager do
   @doc """
   Unsubsribe from the specified event.
 
-  It can be very useful for async systems that are used by multiple PID for example.
-  It's higly recommended only to use it for dynamic subscriptions (see `EventManager.subscribe/2`)
+  It can be very useful for async systems that are used by multiple PIDs for example.
+  It's higly recommended that you only use it for dynamic subscriptions (see `EventManager.subscribe/2`)
 
-  > It will only unsubscribe the event for the current PID.
+  > It will only unsubscribe the event for the calling PID.
 
   E.g.
 
