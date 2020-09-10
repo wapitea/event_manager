@@ -5,10 +5,10 @@
 Official documentation: [hexdocs](https://hexdocs.pm/event_manager).
 
 
-EventManager help you to manager subscriptions to specific event. Thanks to this lib
-reduce couple become easy.
+The event manager helps you manage subscriptions to specific events. Thanks to this lib,
+you'll be able to easily reduce coupling.
 
-Inspired by the `EventDispatcher` package from Symfony Framework and adapte for 
+Inspired by the `EventDispatcher` package from Symfony Framework and adapted for 
 functionnal programming.
 
 ## Installation
@@ -21,11 +21,11 @@ def deps do
 end
 ```
 
-Before using the lib you must register it using `EventManager.start_link/1` that
-accept a keyword opts. In this keyword you can define `apps` that define all apps
-that could use the `@subscribe` attribute.
+Before using the lib you first have to register it using `EventManager.start_link/1`, which
+also accepts a keyword opts for options. Inside your options, you can specify all the `apps` that
+can use the `@subscribe` attribute.
 
-For example, you can start it using a Supervisor.
+Here's an example using a Supervisor:
 ``` elixir
 children = [%{
   id: EventManager,
@@ -38,12 +38,13 @@ Supervisor.start_link(children, opts)
 
 ## Quickstart
 
-In this quickstart we'll define a mailing system that send an email when a new user
-is created. In this example, we supposed you already know ecto and define user schema.
+In this quickstart we'll define a mailing system that sends an email when a new user
+is created. In this example, we assume you know Ecto basics and how to define a user schema.
 
-First, let's create a module that will handle the event `user_created` that will be 
-dispatch we a new user is created. This module will send an email when the `user_created`
-event is dispatched.
+First, let's create a module that will handle the `user_created` event, that will be 
+dispatched when a new user is created.
+
+This module will send an email when the `user_created` event is dispatched.
 
 ``` elixir
 defmodule Mail do
@@ -58,13 +59,13 @@ defmodule Mail do
 end
 ```
 
-The `on_user_created` function will be call each time we dispatch the event `user_created`.
-We assume that we'll send the `user` as event's parameter.
+The `on_user_created` function will be called each time we dispatch the event `user_created`.
+We assume that `user` will be sent as the event's parameter.
 
-When using @subsribe event_name the system will call the function `on_#{event_name}` as default
+When using @subsribe event_name the system will call the function `on_#{event_name}` as the default
 callback.
 
-Then, we'll create an `User` module with a `create/1` function. This function will dispatch an 
+Then, we'll create a `User` module with the `create/1` function. This function will dispatch a 
 `user_created` event when the user has been inserted into the database.
 
 ``` elixir
@@ -87,7 +88,7 @@ end
 
 ## Subscribers
 
-There is 2 way to register a subscriber.
+There are 2 ways to register a subscriber.
 
 - Dynamically 
 
@@ -101,8 +102,8 @@ EventManager.subscribe("event_name", {MyApp, :callback})
 @subscribe "event_name"` or `@subscribe event: "event_name", callback: :function_name`
 ```
 
-> In case you only user `@subscribe "event_name"`, the callback's name will be `on_event_name`.
+> In case you only use `@subscribe "event_name"`, the callback's name will be `on_event_name`.
 
-Module that use static subscription must use the module `EventManager.Handler`. Using this module will
-define a function call `subscriptions/0` that return the list of subscribed event. It will also registry
-automatically your callback for the specified event.
+Modules that use static subscriptions must use the module `EventManager.Handler`. Using this module will
+define a function called `subscriptions/0` that returns the list of subscribed events. It will also register
+your callback automatically for the specified event.
