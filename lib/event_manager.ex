@@ -1,8 +1,8 @@
 defmodule EventManager do
   @moduledoc """
-  The event manager dispatches events to subscribers.
+  The event manager dispatches events to subscribers and
+  adds some syntactic sugar as well as helpers on top of elixir's Registry.
 
-  It simply and adds some syntactic sugar and helpers on top of elixir's Registry.
   It can also help reduce code complexity and lib coupling.
   """
 
@@ -16,7 +16,7 @@ defmodule EventManager do
 
   `opts` accepts :
 
-  - `:apps`: The application name that you want to use in EventManager.
+  - `:apps`: The application name that you want to use in the EventManager.
 
   E.g
 
@@ -30,8 +30,8 @@ defmodule EventManager do
   @doc """
   Subscribe to an event.
 
-  You can subscribe to an event by using the `@subscribe` attribute. To use
-  this attribute, you must use `EventManager.Handler`.
+  You can subscribe to an event by using the `@subscribe` attribute.
+  To use it, first you must use `EventManager.Handler`.
 
   E.g.
 
