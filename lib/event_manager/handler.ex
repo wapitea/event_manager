@@ -1,11 +1,11 @@
 defmodule EventManager.Handler do
   @moduledoc """
-  Event message is define with the following format :
+  An event message is defined with the following format :
 
   ```
   %{event: "event_name", payload: "data"}
   ```
-  The payload data could be any kind of data type (integer, float, Map ...).
+  The payload data can be any of type (integer, float, Map ...).
   """
 
   @callback subscriptions() :: any
