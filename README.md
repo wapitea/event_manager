@@ -62,7 +62,7 @@ end
 The `on_user_created` function will be called each time we dispatch the event `user_created`.
 We assume that `user` will be sent as the event's parameter.
 
-When using @subsribe event_name the system will call the function `on_#{event_name}` as the default
+When using `@subscribe` event_name the system will call the function `on_#{event_name}` as the default
 callback.
 
 Then, we'll create a `User` module with the `create/1` function. This function will dispatch a 
