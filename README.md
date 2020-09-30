@@ -99,7 +99,9 @@ EventManager.subscribe("event_name", {MyApp, :callback})
 - Staticly
 
 ```elixir
-@subscribe "event_name"` or `@subscribe event: "event_name", callback: :function_name`
+@subscribe "event_name"
+# or 
+@subscribe event: "event_name", callback: :function_name
 ```
 
 > In case you only use `@subscribe "event_name"`, the callback's name will be `on_event_name`.
